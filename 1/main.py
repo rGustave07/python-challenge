@@ -8,9 +8,14 @@ finAnalysis = {
     'total_months': 0,
     'total_revenue': 0,
     'avg_rev_chg': 0,
-    'grtst_inc_rev': 0,
-    'grtst_dec_rev': 0
+    'grtest_inc_rev': 0,
+    'grtest_inc_date': 0,
+    'grtest_dec_rev': 0,
+    'grtest_dec_date': 0
 }
+
+highest_val_index = 0
+current_val_index = 0
 
 print(os.listdir())
 for file in os.listdir():
@@ -25,6 +30,12 @@ for file in os.listdir():
                 if (line[1] != "Revenue"):
                     finAnalysis['total_revenue'] = finAnalysis['total_revenue'] + int(line[1])
                     finAnalysis['total_months'] = finAnalysis['total_months'] + 1
+                    if int(line[1]) > finAnalysis['grtest_inc_rev']:
+                        finAnalysis['grtest_inc_rev'] = int(line[1])
+                        finAnalysis['grtest_inc_date'] = line[0]
+                    if int(line[1]) < finAnalysis['grtest_dec_rev']:
+                        finAnalysis['grtest_dec_date'] = line[0]
+                        finAnalysis['grtest_dec_rev'] = int(line[1])
             # createdfile.close()
 
 
@@ -34,6 +45,7 @@ print(finAnalysis['total_months'])
 finAnalysis['avg_rev_chg'] = finAnalysis['total_revenue'] / finAnalysis['total_months']
 print(finAnalysis['avg_rev_chg'])
 
+print(finAnalysis)
 
 
 
